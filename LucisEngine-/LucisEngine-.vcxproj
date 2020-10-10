@@ -91,12 +91,16 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>LE_PLATFORM_WINDOWS;LE_BUILD_DLL;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Utility\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OutputFile>$(OutDir)LucisEngine-$(TargetExt)</OutputFile>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y "$(OutDir)LucisEngine-.dll" "$(SolutionDir)bin\$(Configuration)-$(Platform)\Sandbox\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -118,6 +122,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>LE_PLATFORM_WINDOWS;LE_BUILD_DLL;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Utility\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -126,6 +131,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OutputFile>$(OutDir)LucisEngine-$(TargetExt)</OutputFile>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y "$(OutDir)LucisEngine-.dll" "$(SolutionDir)bin\$(Configuration)-$(Platform)\Sandbox\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -144,12 +152,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Lucis\Log.h" />
     <ClInclude Include="src\Lucis.h" />
     <ClInclude Include="src\Lucis\Application.h" />
     <ClInclude Include="src\Lucis\Core.h" />
     <ClInclude Include="src\Lucis\EntryPoint.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Lucis\Log.cpp" />
     <ClCompile Include="src\Lucis\Application.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
